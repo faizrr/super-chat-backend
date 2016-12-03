@@ -27,6 +27,10 @@ group :development, :test do
   gem 'rspec-rails', '3.5.2'
   gem 'pry', '0.10.4'
   gem 'pry-rails', '0.3.4'
+  gem 'pry-byebug', '3.4.1'
+  gem 'factory_girl_rails', '4.7.0'
+  gem 'ffaker', '2.3.0'
+  gem 'webmock', '2.1.0'
 end
 
 group :development do
@@ -41,5 +45,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'knock', '2.0'
 gem 'dotenv-rails', '2.1.1'
-gem 'pry-byebug', '3.4.1'
 gem 'rest-client', '2.0.0'
+gem 'simplecov', :require => false, :group => :test
+
+gem 'database_cleaner', '1.5.3'

@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+  validates :auth0_id, presence: true
+
   def self.from_token_payload(payload)
     @jwt_payload = payload
 
-    where(auth0_id: payload['sub']).first_or_initialize.tap do |user|
+    where(auth0_id: payload['sub']).first_or_initialize do |user|
       profile = get_profile_info
 
       user.auth0_id = profile['user_id']
