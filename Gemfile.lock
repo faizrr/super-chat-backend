@@ -39,6 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -49,6 +50,11 @@ GEM
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
+    jwt (1.5.6)
+    knock (2.0)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -150,6 +156,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  knock (= 2.0)
   listen (~> 3.0.5)
   pg (~> 0.18)
   pry (= 0.10.4)
