@@ -4,6 +4,10 @@ class User < ApplicationRecord
   def self.from_token_payload(payload)
     @jwt_payload = payload
 
+    unless payload['sub']
+      raise ActiveRecord::RecordNotFound
+    end
+
     where(auth0_id: payload['sub']).first_or_initialize do |user|
       profile = get_profile_info
 

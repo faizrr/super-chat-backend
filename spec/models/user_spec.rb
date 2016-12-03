@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
       stub_request(:post, Rails.application.secrets.auth0_url + '/tokeninfo').
         to_return(body: { name: new_user_attrs[:name], user_id: new_user_attrs[:auth0_id] }.to_json)
 
-      payload = { sub: new_user_attrs[:auth0_id] }
+      payload = { sub: new_user_attrs[:auth0_id] }.stringify_keys!
       user = User.from_token_payload(payload)
 
       expect(User.find_by(auth0_id: new_user_attrs[:auth0_id])).to eql(user)
