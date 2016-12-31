@@ -6,9 +6,7 @@ class User < ApplicationRecord
   def self.from_token_payload(payload)
     @jwt_payload = payload
 
-    unless payload['sub']
-      raise ActiveRecord::RecordNotFound
-    end
+    raise ActiveRecord::RecordNotFound unless payload['sub']
 
     where(auth0_id: payload['sub']).first_or_initialize do |user|
       profile = get_profile_info
@@ -26,7 +24,7 @@ class User < ApplicationRecord
     jwt = Knock::AuthToken.new(payload: @jwt_payload).token
 
     url = Rails.application.secrets.auth0_url + '/tokeninfo'
-    res = RestClient.post(url, { id_token: jwt }.to_json, headers={ 'content-type': 'application/json' })
+    res = RestClient.post(url, { id_token: jwt }.to_json, headers = { 'content-type': 'application/json' })
 
     JSON.parse(res.body)
   end
