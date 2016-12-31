@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   validates :auth0_id, presence: true
 
-  has_and_belongs_to_many :chat_rooms
+  has_and_belongs_to_many :deprecated_chat_rooms,
+                          join_table: :chat_rooms_users, class_name: ChatRoom,
+                          association_foreign_key: :chat_room_id
+  has_many :user_chat_rooms
+  has_many :chat_rooms, through: :user_chat_rooms
 
   def self.from_token_payload(payload)
     @jwt_payload = payload

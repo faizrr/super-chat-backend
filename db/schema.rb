@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203193901) do
+ActiveRecord::Schema.define(version: 20161231105111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,6 @@ ActiveRecord::Schema.define(version: 20161203193901) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "chat_rooms_users", id: false, force: :cascade do |t|
-    t.integer "chat_room_id", null: false
-    t.integer "user_id",      null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -36,6 +31,15 @@ ActiveRecord::Schema.define(version: 20161203193901) do
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
+  create_table "user_chat_rooms", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "chat_room_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["chat_room_id"], name: "index_user_chat_rooms_on_chat_room_id", using: :btree
+    t.index ["user_id"], name: "index_user_chat_rooms_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -44,4 +48,6 @@ ActiveRecord::Schema.define(version: 20161203193901) do
   end
 
   add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "user_chat_rooms", "chat_rooms"
+  add_foreign_key "user_chat_rooms", "users"
 end
