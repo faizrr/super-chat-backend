@@ -26,6 +26,7 @@ module Chat
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.action_cable.allowed_request_origins = ['chrome-extension://pfdhoblngboilpfeibdedpjgfnlcodoo']
 
     config.generators do |g|
       g.fixture_replacement :factory_girl
