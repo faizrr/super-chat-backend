@@ -50,5 +50,5 @@ gem 'simplecov', require: false, group: :test
 
 gem 'database_cleaner', '1.5.3'
 
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model_serializers', '0.9'
 gem 'pundit'
