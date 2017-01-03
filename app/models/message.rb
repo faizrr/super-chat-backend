@@ -4,4 +4,6 @@ class Message < ApplicationRecord
 
   validates :user, presence: true
   validates :chat_room, presence: true
+
+  after_create_commit { MessageBroadcastJob.perform_later(self) }
 end
